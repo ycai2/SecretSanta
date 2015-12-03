@@ -17,12 +17,15 @@
       <div class="container">
         <div class="well">
           <h4>Your Secret Santa is</h4>
-          {% if not santa %}
+          {% if msg %}
+          <h1 style="color: #ff4136">{{ msg|e }}</h1>
+          {% elif not santa %}
           <h1 style="color: #ff4136">Out of Santas</h1>
           {% else %}
           <h1 style="color: #39cccc">{{ santa.name|e }}</h1>
           <p>{{ santa.address|e }}</p>
           {% endif %}
+
         </div>
       </div>
 

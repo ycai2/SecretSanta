@@ -44,28 +44,37 @@ class MainPage(MainHandler):
 
     def post(self):
         friends = db.GqlQuery("select * from Friends order by created desc limit 10")
-        current = self.request.get('name')
+        current_name = self.request.get('name')
+        current = Friends.by_name(current_name)
         santa = None
-        for friend in friends:
-          if friend.picked == False and random.randint(1,2) == 1 and friend.name != current:
-            print friend.name
-            santa = friend
-            break
+        msg = None
+        if current and not current.hasPicked:
+            for friend in friends:
+                if not friend.isPicked and random.randint(1,2) == 1 and friend.name != current.name: 
+                    print friend.name
+                    santa = friend
+                break
+            #In case randomness doesn't find santa
+            if not santa:
+                for friend in friends:
+                    if not friend.isPicked and friend.name != current.name:
+                        santa = friend
 
-        if not santa:
-          for friend in friends:
-            if friend.picked == False and friend.name != current:
-              santa = friend
-              break
+        elif current.hasPicked:
+            msg = 'You have already picked!' 
 
+        else:
+            msg = 'You do not exist!'
 
         if santa:
-          friend_current = Friends.by_name(santa.name)
-          friend_current.picked = True
-          friend_current.put()
+            friend_current = Friends.by_name(santa.name)
+            friend_current.isPicked = True
+            friend_current.put()
+            current.hasPicked = True
+            current.put()
 
 
-        self.render('main.html', friends = friends, santa = santa)
+        self.render('main.html', friends = friends, santa = santa, msg = msg)
         
 
 def friend_key(name = 'default'):
@@ -75,7 +84,8 @@ class Friends(db.Model):
     name = db.StringProperty(required = True)
     address = db.TextProperty(required = True)
     created = db.DateTimeProperty(auto_now_add = True)
-    picked = db.BooleanProperty()
+    isPicked = db.BooleanProperty(default = False)
+    hasPicked = db.BooleanProperty(default = False)
 
     @classmethod
     def by_name(cls, name):
@@ -83,8 +93,8 @@ class Friends(db.Model):
         return n
 
     @classmethod
-    def register(cls, name, address, picked):
-        return Friends(name = name, address = address, picked = picked)
+    def register(cls, name, address):
+        return Friends(name = name, address = address)
 
 
 USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
@@ -98,7 +108,8 @@ class Signup(MainHandler):
 
     def post(self):
         self.name = self.request.get('name')
-        self.address = 'add'
+        self.address = self.request.get('street') + ',\n' + self.request.get('city') + ', ' + self.request.get('state') + ' ' + self.request.get('zip')
+        
         self.done()
 
 
@@ -110,7 +121,7 @@ class Register(Signup):
             msg = 'That name already exists. '
             self.render('signup-form.html', error_name = msg)
         else:
-            f = Friends.register(self.name, self.address, False)
+            f = Friends.register(self.name, self.address)
             f.put()
             self.redirect('/signup')
 

@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1 class="page-header">Secret Santa Signup</h1>
+  <h1 class="page-header text-center">Secret Santa Signup</h1>
   <form method="post">
-  <div class="signup">
-    <h3>Enter Your Name</h3>
-    <div class="input-group">
-      <span class="input-group-addon">Your Name</span>
-      <input type="text" class="form-control" name="name">
-    </div>
+  <div class="signup form-signin">
+    <h3>Friend Info</h3>
+    <input type="text" class="form-control first-input" name="name" placeholder="First Last" required autofocus>
+    <input type="text" class="form-control" name="street" placeholder="111 Some Street" required autofocus>
+    <input type="text" class="form-control" name="city" placeholder="Somecity" required autofocus>
+    <input type="text" class="form-control" name="state" placeholder="NY" required autofocus>
+    <input type="text" class="form-control last-input" name="zip" placeholder="100000" required autofocus pattern="\d{5}-?(\d{4})?">
     <hr>
     <button type="submit" class="btn btn-default">Submit</button>
-    <p>{{ error_name }}</p>
+    
+    <h3>{{ error_name }}</h3>
   </div>
   <a href="/">Back</a>
   </form>

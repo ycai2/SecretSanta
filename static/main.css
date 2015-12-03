@@ -1,83 +1,40 @@
-body {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 14px;
 
-    width: 800px;
-    margin: 0 auto;
-    padding: 10px;
-    color: #333;
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 0;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
 }
 
-h2 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
+.form-signin .first-input {
+  margin-bottom: 0px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
-
-.error {
-    color: red;
+.form-signin .last-input {
+  margin-bottom: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
-
-label {
-  display: block;
-  font-size: 20px;
-}
-
-label + label {
-    margin-top: 20px;
-}
-
-input[type=text] {
-    width: 500px;
-    font-size: 20px;
-    padding: 2px;
-    font-family: monospace;
-}
-
-textarea {
-  width: 500px;
-  height: 400px;
-  font-size: 17px;
-  font-family: monospace;
-}
-
-input[type=submit] {
-  font-size: 24px;
-}
-
-.main-title {
-    display: block;
-    color: #222;
-    font-size: 40px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 30px;
-    text-decoration: none;
-}
-
-.post + .post {
-    margin-top: 15px;
-}
-
-.post-heading {
-    position: relative;
-    border-bottom: 3px solid #666;
-}
-
-.post-title {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.post-date {
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
-    color: #999;
-
-}
-
-.post-content {
-    margin-top: 5px;
-}
-
