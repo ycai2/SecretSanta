@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="page-header">Secret Santa</h1>
+  <form method="post">
+    <div class="lottery">
+      <h3>Select Your Name</h3>
+      <select name='name'>
+        {% for friend in friends %}
+          <option>{{ friend.name|e }}</option>
+        {% endfor %}
+      </select>
+      <hr>
+      <button type="submit" class="btn btn-default">Submit</button>
+      <br>
+      <br>
+      <div class="container">
+        <div class="well">
+          <h4>Your Secret Santa is</h4>
+          {% if not santa %}
+          <h1 style="color: #ff4136">Out of Santas</h1>
+          {% else %}
+          <h1 style="color: #39cccc">{{ santa.name|e }}</h1>
+          <p>{{ santa.address|e }}</p>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </form>
+{% endblock %}
+
+
+
+

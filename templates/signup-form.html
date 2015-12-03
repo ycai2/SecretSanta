@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="page-header">Secret Santa Signup</h1>
+  <form method="post">
+  <div class="signup">
+    <h3>Enter Your Name</h3>
+    <div class="input-group">
+      <span class="input-group-addon">Your Name</span>
+      <input type="text" class="form-control" name="name">
+    </div>
+    <hr>
+    <button type="submit" class="btn btn-default">Submit</button>
+    <p>{{ error_name }}</p>
+  </div>
+  <a href="/">Back</a>
+  </form>
+{% endblock %}
+
+
+
+
