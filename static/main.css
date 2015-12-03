@@ -1,4 +1,6 @@
-
+body {
+  margin-top: 15px;
+}
 .form-signin {
   max-width: 330px;
   padding: 15px;
@@ -38,3 +40,10 @@
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
+
+.navbar-inverse {
+  background-image: linear-gradient(to bottom,#222 0,#222 100%);
+  border-color: #538180;
+}
+
+
